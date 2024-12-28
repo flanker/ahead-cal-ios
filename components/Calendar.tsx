@@ -1,16 +1,15 @@
 import dayjs, { Dayjs } from "dayjs";
 import { ChevronLeft, ChevronRight } from "lucide-react-native";
-import React, { useEffect } from "react";
+import React from "react";
 import {
   View,
   Text,
   TouchableOpacity,
   StyleSheet,
   Dimensions,
-  ScrollView,
 } from "react-native";
 import { HOLIDAYS } from "@/components/constants";
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface MonthCalendarProps {
   date: Dayjs;
@@ -62,11 +61,13 @@ function MonthCalendar({
           holiday && styles.holiday,
         ]}
       >
-        <Text style={[
-          styles.dayText,
-          !date && styles.emptyDay,
-          isToday(date) && styles.todayText
-        ]}>
+        <Text
+          style={[
+            styles.dayText,
+            !date && styles.emptyDay,
+            isToday(date) && styles.todayText,
+          ]}
+        >
           {date?.date()}
         </Text>
         {holiday && (
@@ -119,14 +120,17 @@ export default function Calendar() {
   const secondMonth = firstMonth.add(1, "month");
 
   return (
-    <View style={[
-      styles.container,
-      {
-        height: SCREEN_HEIGHT - insets.bottom,
-        paddingTop: insets.top,
-        paddingBottom: insets.bottom
-      }
-    ]}>
+    <View
+      style={[
+        styles.container,
+        {
+          height: SCREEN_HEIGHT - insets.bottom,
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingHorizontal: 16,
+        },
+      ]}
+    >
       <View style={styles.navigation}>
         <TouchableOpacity onPress={handlePrevMonth} style={styles.navButton}>
           <ChevronLeft size={24} color="#000" />
@@ -144,7 +148,15 @@ export default function Calendar() {
           currentDate={currentDate}
           style={[
             styles.monthCalendar,
-            { height: (SCREEN_HEIGHT - insets.top - insets.bottom - NAVIGATION_HEIGHT - insets.bottom) / 2 }
+            {
+              height:
+                (SCREEN_HEIGHT -
+                  insets.top -
+                  insets.bottom -
+                  NAVIGATION_HEIGHT -
+                  insets.bottom) /
+                2,
+            },
           ]}
         />
         <MonthCalendar
@@ -153,7 +165,15 @@ export default function Calendar() {
           headerStyle={styles.secondMonthHeader}
           style={[
             styles.monthCalendar,
-            { height: (SCREEN_HEIGHT - insets.top - insets.bottom - NAVIGATION_HEIGHT - insets.bottom) / 2 }
+            {
+              height:
+                (SCREEN_HEIGHT -
+                  insets.top -
+                  insets.bottom -
+                  NAVIGATION_HEIGHT -
+                  insets.bottom) /
+                2,
+            },
           ]}
         />
       </View>
@@ -163,14 +183,14 @@ export default function Calendar() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   navigation: {
     height: NAVIGATION_HEIGHT,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   navButton: {
     padding: 8,
@@ -183,13 +203,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   todayText: {
-    color: '#007AFF',
+    color: "#007AFF",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   calendarContainer: {
     flex: 1,
-    paddingHorizontal: 16,
   },
   monthCalendar: {
     flex: 1,
@@ -243,7 +262,7 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
   today: {
-    backgroundColor: '#e6f3ff',
+    backgroundColor: "#e6f3ff",
   },
   weekend: {
     backgroundColor: "#f8f8f8",
