@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "AheadCal",
-    "slug": "A forward-looking calendar that shows current and next month for better planning.",
+    "slug": "aheadcal",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -9,13 +9,15 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.fengzhichao.aheadcal"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.fengzhichao.aheadcal"
     },
     "web": {
       "bundler": "metro",
@@ -36,6 +38,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "@env EAS_PROJECT_ID"
+      }
+    },
+    "owner": "fengzhichao"
   }
 }
