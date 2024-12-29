@@ -44,30 +44,24 @@ function MonthCalendar({
   };
 
   const renderDay = (date: Dayjs | null) => {
-    const holiday = isHoliday(date);
     return (
-      <View
-        style={[
-          styles.day,
-          isToday(date) && styles.today,
-          isWeekend(date) && styles.weekend,
-          holiday && styles.holiday,
-        ]}
-      >
+      <View style={[styles.day, isToday(date) && styles.today]}>
         <Text
           style={[
             styles.dayText,
             !date && styles.emptyDay,
             isToday(date) && styles.todayText,
+            isWeekend(date) && styles.weekendText,
+            isHoliday(date) && styles.holidayText,
           ]}
         >
           {date?.date()}
         </Text>
-        {holiday && (
+        {/* {holiday && (
           <Text style={styles.holidayText} numberOfLines={1}>
             {holiday.name}
           </Text>
-        )}
+        )} */}
       </View>
     );
   };
@@ -78,13 +72,6 @@ function MonthCalendar({
         {date.format("MMMM YYYY")}
       </Text>
       <View style={styles.calendarGrid}>
-        <View style={styles.weekdayRow}>
-          {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-            <View key={day} style={styles.weekday}>
-              <Text style={styles.weekdayText}>{day[0]}</Text>
-            </View>
-          ))}
-        </View>
         <View style={styles.daysGrid}>
           {days.map((day, i) => (
             <View key={i} style={styles.dayWrapper}>
@@ -126,9 +113,9 @@ export default function Calendar() {
   // 计算每个月的高度
   const getMonthHeight = (date: Dayjs) => {
     const rows = getMonthRows(date);
-    const HEADER_HEIGHT = 60; // 月份标题高度
+    const HEADER_HEIGHT = 70; // 月份标题高度
     const WEEKDAY_ROW_HEIGHT = 30; // 星期行高度
-    const DAY_ROW_HEIGHT = 50; // 每行日期的高度
+    const DAY_ROW_HEIGHT = 30; // 每行日期的高度
     const PADDING = 24; // 上下padding总和
 
     return HEADER_HEIGHT + WEEKDAY_ROW_HEIGHT + rows * DAY_ROW_HEIGHT + PADDING;
@@ -244,7 +231,7 @@ export default function Calendar() {
           height: SCREEN_HEIGHT - insets.bottom,
           paddingTop: insets.top,
           paddingBottom: insets.bottom,
-          paddingHorizontal: 16,
+          paddingHorizontal: 64,
         },
       ]}
     >
@@ -279,16 +266,12 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   monthTitle: {
-    fontSize: 28, // 增大月份标题字体
+    fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 16,
+    marginBottom: 4,
   },
   calendarGrid: {
     width: "100%",
-  },
-  weekdayRow: {
-    flexDirection: "row",
-    marginBottom: 8,
   },
   weekday: {
     width: "14.28%",
@@ -318,28 +301,32 @@ const styles = StyleSheet.create({
   },
   dayText: {
     fontSize: 14,
-    fontWeight: "400",
+    fontWeight: "500",
   },
   emptyDay: {
     opacity: 0,
   },
   today: {
     backgroundColor: "#e6f3ff",
+    borderRadius: "100%",
   },
-  weekend: {
-    backgroundColor: "#f8f8f8",
-  },
-  holiday: {
-    backgroundColor: "#ffe6e6",
+  weekendText: {
+    color: "#ff4d4d",
   },
   holidayText: {
-    fontSize: 10,
     color: "#ff4d4d",
-    position: "absolute",
-    bottom: 2,
-    width: "100%",
-    textAlign: "center",
   },
+  // holiday: {
+  //   backgroundColor: "#ffe6e6",
+  // },
+  // holidayText: {
+  //   fontSize: 10,
+  //   color: "#ff4d4d",
+  //   position: "absolute",
+  //   bottom: 2,
+  //   width: "100%",
+  //   textAlign: "center",
+  // },
   todayText: {
     color: "#007AFF",
     fontWeight: "600",
