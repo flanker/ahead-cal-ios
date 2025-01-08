@@ -10,14 +10,14 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.fengzhichao.aheadcal"
+      "bundleIdentifier": "com.kongrui.aheadcal"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.fengzhichao.aheadcal"
+      "package": "com.kongrui.aheadcal"
     },
     "web": {
       "bundler": "metro",
